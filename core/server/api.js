@@ -44,7 +44,7 @@ exports.getPlugins = function (req, res) {
 	
 					db.get(arr[i], function (err, resa){
 
-						if (err) {res.send(500); return;}
+						if (err) {res.send(500, {}); return;}
 						result.push(JSON.parse(resa))
 						i++
 						getityo()
@@ -65,7 +65,7 @@ exports.listPlugins = function (req, res) {
 	var fpath = path.join(__dirname, '..', '..', 'plugins')
 	fs.readdir(fpath, function (err, files) {
 
-		if (err) res.send(500)
+		if (err) res.send(500, {})
 		else if (files)
 			res.send({'plugins':files})
 	})
@@ -79,6 +79,8 @@ exports.pluginStatic = function (req, res){
 
 	if (fpath == 'default.css')
 		res.sendfile(path.join(__dirname, '..', '..', 'app/css/default.css'))
+	else if (fpath == 'utils.js')
+		res.sendfile(path.join(__dirname, '..', '..', 'app/js/utils.js'))
 	else {
 
 		var filepath = path.join(__dirname, '..', '..', 'plugins', plugin, 'config', fpath)
@@ -103,26 +105,61 @@ exports.setPlugin = function (req, res){
 		if (req.body) attr = req.body
 
 		var plugin = {name:req.params.name, attr:attr, uuid:uuid}
-		db.put('plugin.'+uuid, JSON.stringify(plugin), function (err){
+		var filepath = path.join(__dirname, '..', '..', 'plugins', plugin.name)
+		fs.exists(filepath, function (exists){
 
-			if (err) res.send(500)
+			if (!exists)
+				res.send(404, {})
 			else {
 
-				db.get('activePlugins', function(err, str) {
+				db.put('plugin.'+uuid, JSON.stringify(plugin), function (err){
 
-					
-					var arr = []
-					if (!str) arr = []
-					else arr = JSON.parse(str)
+					if (err) res.send(500, {})
+					else {
 
-					arr.push(uuid)
-					db.put('activePlugins', JSON.stringify(arr), function (err) {
+						db.get('activePlugins', function(err, str) {
 
-						if (err) res.send(500)
-						else
-							res.send({plugin:plugin})
-					})
-					
+							var arr = []
+							if (!str) arr = []
+							else arr = JSON.parse(str)
+
+							arr.push(uuid)
+							db.put('activePlugins', JSON.stringify(arr), function (err) {
+
+								if (err) res.send(500, {})
+								else
+									res.send({plugin:plugin})
+							})
+							
+						})
+					}
+				})
+			}
+		})
+
+	}
+	else {
+
+		var uuid = req.params.uuid
+
+		var attr = {}
+		if (req.body) attr = req.body
+
+		var plugin = {name:req.params.name, attr:attr, uuid:uuid}
+		var filepath = path.join(__dirname, '..', '..', 'plugins', plugin.name)
+		fs.exists(filepath, function (exists){
+
+			if (!exists)
+				res.send(404, {})
+			else {
+
+				db.put('plugin.'+uuid, JSON.stringify(plugin), function (err){
+
+					if (err) res.send(500, {})
+					else {
+
+						res.send({plugin:plugin})
+					}
 				})
 			}
 		})
@@ -132,7 +169,28 @@ exports.setPlugin = function (req, res){
 //POST plugin order
 exports.setOrder = function (req, res){
 
+	var order = req.body.plugins
 
+	db.get('activePlugins', function (err, str) {
+
+		if (err) res.send(500, {})
+		else {
+
+			var arr = JSON.parse(str)
+
+			if (arr.length == order.length){
+
+				db.put('activePlugins', JSON.stringify(order), function (err){
+
+					if (err) res.send(500, {})
+					else {
+
+						 res.send(200, {})
+					}
+				})
+			}
+		}
+	})
 }
 
 //GET hour to trigger thing
@@ -152,11 +210,11 @@ exports.getHour = function (req, res){
 exports.setHour = function (req, res){
 
 	var time = req.body['time']
-	if (!time) res.send(500)
+	if (!time) res.send(500, {})
 	else {
 
 		db.put('time', time, function (err){
-			if (!err) res.send(200)
+			if (!err) res.send(200, {})
 		})
 	}
 }
