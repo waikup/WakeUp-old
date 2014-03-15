@@ -18,6 +18,7 @@ API.addPlugin = function(name, cb) {
 	})
 }
 
+
 API.setOrder = function(array) {
 	$.post('/api/plugins/order', {'plugins': array})
 }

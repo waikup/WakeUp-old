@@ -4,7 +4,7 @@ SC.initialize({
 
 function search(query, cb) {
 
-	SC.get("/tracks", {q: query, limit: 5}, function(tracks){
+	SC.get("/tracks", {q: query, limit: 5}, function(tracks) {
 		cb(tracks)
 	})
 }
@@ -21,3 +21,7 @@ $(document).ready(function() {
 		})
 	})	
 })
+
+console.log(Utils.getArgs())
+
+console.log(Utils.sendArgs({'err': null, 'wheee': 'manolo'}))
