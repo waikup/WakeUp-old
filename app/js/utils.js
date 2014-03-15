@@ -1,6 +1,6 @@
 var Utils = {}
 
-Utils.getArgs = function() {
+Utils.getConfig = function() {
 	var hashes = window.location.hash.split('#')[1].split('&'),
 		args = {}
 
@@ -12,11 +12,17 @@ Utils.getArgs = function() {
 	return args
 }
 
-Utils.sendArgs = function(data) {
+Utils.parseConfig = function(data) {
 	var encoded = '#'
 	for (var key in data) {
 		encoded += (key + '=' + encodeURIComponent(data[key]) + '&')
 	}
 	encoded = encoded.substring(0, encoded.length - 1);
 	return encoded
+}
+
+Utils.sendConfig = function(data) {
+
+	// TODO
+	window.parent.configChanged(Utils.parseArgs())
 }
