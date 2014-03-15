@@ -21,7 +21,10 @@
   ],
   "version": "0.0.1",
   "dependencies": {
+    "express": "~3.4.8"
   },
-  "devDependencies": {
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js"
   }
 }
