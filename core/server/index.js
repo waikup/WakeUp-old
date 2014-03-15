@@ -27,11 +27,14 @@ app.get('/api', api.api)
 //API
 app.get('/api/plugins/active', middleware.json, api.getPlugins)
 app.get('/api/plugins/all', middleware.json, api.listPlugins)
+
 app.get('/plugin/:name/*', api.pluginStatic)
 
 app.post('/api/plugin/:name/:uuid', middleware.json, api.setPlugin)
 app.post('/api/order', middleware.json, api.setOrder)
-app.post('/api/hour', middleware.json, api.setHour)
+
+app.get('/api/time', middleware.json, api.getHour)
+app.post('/api/time', middleware.json, api.setHour)
 
 
 module.exports = exports = app

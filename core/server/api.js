@@ -28,6 +28,7 @@ exports.getPlugins = function (req, res) {
 			var arr = JSON.parse(str)
 			for (i in arr) arr[i] = 'plugin.'+arr[i]
 			
+			//TODO: use async here, find out why it crashed
 			var result = []
 			var i = 0;
 
@@ -135,8 +136,21 @@ exports.setOrder = function (req, res){
 
 }
 
+//GET hour to trigger thing
+exports.getHour = function (req, res){
+
+	db.get('time', function (err, t){
+
+		if (err || t) res.send({time:'00:00'})
+		else {
+
+			res.send({time:t})
+		}
+	})
+}
+
 //POST hour to trigger thing
 exports.setHour = function (req, res){
 
-
+	console.log(res.body)
 }
