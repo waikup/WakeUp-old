@@ -136,6 +136,32 @@ exports.setPlugin = function (req, res){
 		})
 
 	}
+	else {
+
+		var uuid = req.params.uuid
+
+		var attr = {}
+		if (req.body) attr = req.body
+		
+		var plugin = {name:req.params.name, attr:attr, uuid:uuid}
+		var filepath = path.join(__dirname, '..', '..', 'plugins', plugin.name)
+		fs.exists(filepath, function (exists){
+
+			if (!exists)
+				res.send(404, {})
+			else {
+
+				db.put('plugin.'+uuid, JSON.stringify(plugin), function (err){
+
+					if (err) res.send(500)
+					else {
+
+						res.send({plugin:plugin})
+					}
+				})
+			}
+		})
+	}
 }
 
 //POST plugin order
