@@ -1,17 +1,26 @@
-//http://api.soundcloud.com/tracks/13158665/stream?client_id=5a8edbed865ed2b31acf4d9720696e7f
+	var Player = require('player');
+	var http = require('http');
 
-var Speaker = require('speaker');
+	module.exports = function (id, callback){
 
-var speaker = new Speaker({
-	channels: 2,          // 2 channels
-	bitDepth: 16,         // 16-bit samples
-	sampleRate: 44100     // 44,100 Hz sample rate
-});
+		// Does this, because the awesome module, player, doesn't works with redirections.
 
+		http.get('http://api.soundcloud.com/tracks/' + id + '/stream?client_id=5a8edbed865ed2b31acf4d9720696e7f', function (res){
 
-module.exports = function (callback){
+			var player = new Player(res.headers.location);
 
-	//http://api.soundcloud.com/tracks/13158665/stream?client_id=5a8edbed865ed2b31acf4d9720696e7f
+			player.play();
 
+			player.on('playend',function(item){
+				callback(null, item);
+			});
 
-};
+			// event: on error
+			player.on('error', function(err){
+			    // when error occurs
+			    callback(err);
+			});
+
+		});
+
+	};
