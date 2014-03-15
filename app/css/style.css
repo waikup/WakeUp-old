@@ -36,3 +36,7 @@ section.current {
 #plugin {
 	border: none;
 }
+
+#time {
+	line-height: 50px;
+}

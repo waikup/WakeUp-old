@@ -11,10 +11,11 @@ function search(query, cb) {
 
 $(document).ready(function() {
 	$('input').on('keyup', function() {
+		$('#results ul').html('')
 		search($(this).val(), function(tracks) {
 			tracks.forEach(function(track) {
 				console.log(track)
-				var li = $('<li>').text(track.title).css('backgroundImage', track.artwork_url).data('id', track.id)
+				var li = $('<li>').text(track.title).css('backgroundImage', 'url('+track.artwork_url+')').data('id', track.id)
 				$('#results ul').append(li)
 			})
 		})
