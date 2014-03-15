@@ -87,7 +87,7 @@ exports.pluginStatic = function (req, res){
 		fs.exists(filepath, function (exists){
 
 			if (!exists)
-				res.send(404)
+				res.send(404, {})
 			else 
 				res.sendfile(filepath)
 		})
