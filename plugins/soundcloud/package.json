@@ -1,13 +1,12 @@
 {
-  "name": "wakeup-soundcloud",
+  "name": "soundcloud",
   "description": "",
   "keywords": [
     "Soundcloud"
   ],
   "version": "0.0.1",
   "dependencies": {
-    "speaker": "*",
-    "request": "*"
+    "player": "*"
   },
   "devDependencies": {
   }
