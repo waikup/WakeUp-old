@@ -82,7 +82,6 @@ exports.pluginStatic = function (req, res){
 	else {
 
 		var filepath = path.join(__dirname, '..', '..', 'plugins', plugin, 'config', fpath)
-		console.log(filepath)
 		fs.exists(filepath, function (exists){
 
 			if (!exists)
@@ -141,7 +140,7 @@ exports.getHour = function (req, res){
 
 	db.get('time', function (err, t){
 
-		if (err || t) res.send({time:'00:00'})
+		if (err || !t) res.send({time:'00:00'})
 		else {
 
 			res.send({time:t})
@@ -152,5 +151,12 @@ exports.getHour = function (req, res){
 //POST hour to trigger thing
 exports.setHour = function (req, res){
 
-	console.log(res.body)
+	var time = req.body['time']
+	if (!time) res.send(500)
+	else {
+
+		db.put('time', time, function (err){
+			if (!err) res.send(200)
+		})
+	}
 }
