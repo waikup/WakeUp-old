@@ -12,9 +12,9 @@ API.getAllPlugins = function(cb) {
 	})
 }
 
-API.addPlugin = function(data, cb) {
-	$.postJSON('/api/plugins/' + name + '/new', {}, function(uuid) {
-		cb(uuid)
+API.addPlugin = function(name, cb) {
+	$.post('/api/plugin/' + name + '/new', function(data) {
+		cb(data['plugin'])
 	})
 }
 

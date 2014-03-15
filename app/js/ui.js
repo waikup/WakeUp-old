@@ -9,7 +9,8 @@ UI.bind = function() {
 	})
 	$('#add ul').on('click', 'li', function() {
 		var name = $(this).data('name')
-		API.addPlugin(name, function(data) {
+		API.addPlugin(name, function(plugin) {
+			UI.addActivePlugin(plugin)
 			UI.showSection('#list')
 		})
 	})
@@ -17,13 +18,6 @@ UI.bind = function() {
 		$('iframe').attr('/plugin/' + name + '/index.html')
 		UI.showSection('#plugin')
 	})
-
-	var data = {
-		'name': 'SoundCloud',
-		'uuid': '09875648v4y7q576'
-	}
-	UI.addAvailablePlugin(data)
-	UI.addActivePlugin(data)
 }
 
 UI.showSection = function (id) {
@@ -31,14 +25,14 @@ UI.showSection = function (id) {
 	$(id).addClass('current')
 }
 
-UI.addAvailablePlugin = function (data) {
-	var li = $('<li>').data('name', data['name']).text(data['name'])
-	$('#list ul').append(li)
+UI.addAvailablePlugin = function (name) {
+	var li = $('<li>').data('name', name).text(name)
+	$('#add ul').append(li)
 }
 
 UI.addActivePlugin = function (data) {
 	var li = $('<li>').data('name', data['name']).data('uuid', data['uuid']).text(data['name'])
-	$('#add ul').append(li)
+	$('#list ul').append(li)
 }
 
 UI.getOrder = function() {

@@ -26,7 +26,7 @@ ul li {
 	font-size: 20px;
 	border-bottom:1px solid #ECECEC;
 	padding: 0 20px;
-	line-height: 40px;
+	line-height: 70px;
 }
 
 header {
@@ -49,8 +49,8 @@ header span {
 button {
 	background: #007D4E;
 	font-size: 30px;
-	height: 50px;
-	line-height: 50px;
+	height: 70px;
+	line-height: 70px;
 	color: white;
 	font-weight: bold;
 	border: none;

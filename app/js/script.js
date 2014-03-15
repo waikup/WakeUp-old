@@ -1,13 +1,13 @@
 UI.bind()
 
-API.getAllPlugins(function(plugins) {
-	for (var plugin in plugins) {
-		UI.addAvailablePlugin(plugin)
+API.getAllPlugins(function(data) {
+	for (var i in data['plugins']) {
+		UI.addAvailablePlugin(data['plugins'][i])
 	}
 })
 
-API.getActivePlugins(function(plugins) {
-	for (var plugin in plugins) {
-		UI.addActivePlugin(plugin)
+API.getActivePlugins(function(data) {
+	for (var i in data['active']) {
+		UI.addActivePlugin(data['active'][i])
 	}
 })
