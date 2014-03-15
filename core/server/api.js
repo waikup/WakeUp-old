@@ -20,7 +20,15 @@ exports.getPlugins = function (req, res){
 //GET list of all available plugins in plugins directory
 exports.listPlugins = function (req, res){
 
+	var fpath = path.join(__dirname, '..', '..', 'plugins')
+	fs.readdir(fpath, function (err, files){
 
+		if (err) res.send(500)
+		else if (files){
+
+			res.send({'plugins':files})
+		}
+	})
 }
 
 //GET config folder of a given plugin
@@ -29,7 +37,7 @@ exports.pluginStatic = function (req, res){
 	var plugin = req.params.name,
 		fpath = req.params[0]
 
-	if (path == 'css/default.css'){
+	if (fpath == 'default.css'){
 
 		res.sendfile(path.join(__dirname, '..', '..', 'app/css/default.css'))
 	}
