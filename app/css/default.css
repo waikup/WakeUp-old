@@ -34,7 +34,7 @@ header {
 	font-size: 30px;
 	line-height: 50px;
 	text-transform: uppercase;
-	border-bottom:1px solid #ECECEC;
+	background: #ECECEC;
 	text-align: center;
 }
 

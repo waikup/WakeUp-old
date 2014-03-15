@@ -1,20 +1,20 @@
 var API = {}
 
-API.getActivePlugins = function() {
+API.getActivePlugins = function(cb) {
 	$.getJSON('/api/plugins/active', function(plugins) {
-		console.log(plugins)
+		cb(plugins)
 	})
 }
 
-API.getAllPlugins = function() {
+API.getAllPlugins = function(cb) {
 	$.getJSON('/api/plugins/all', function(allPlugins) {
-		console.log(allPlugins)
+		cb(allPlugins)
 	})
 }
 
-API.activePlugins = function() {
-	$.postJSON('/api/plugins/' + name + '/new', function(uuid) {
-		console.log(uuid)
+API.addPlugin = function(data, cb) {
+	$.postJSON('/api/plugins/' + name + '/new', {}, function(uuid) {
+		cb(uuid)
 	})
 }
 

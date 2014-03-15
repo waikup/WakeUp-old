@@ -8,9 +8,10 @@ UI.bind = function() {
 		UI.showSection('#list')
 	})
 	$('#add ul').on('click', 'li', function() {
-		// call new
-		//$('iframe').attr('/plugin/' + name + '/index.html')
-		//UI.showSection('#plugin')
+		var name = $(this).data('name')
+		API.addPlugin(name, function(data) {
+			UI.showSection('#list')
+		})
 	})
 	$('#list ul').on('click', 'li', function() {
 		$('iframe').attr('/plugin/' + name + '/index.html')
@@ -22,7 +23,7 @@ UI.bind = function() {
 		'uuid': '09875648v4y7q576'
 	}
 	UI.addAvailablePlugin(data)
-	UI.addInstalledPlugin(data)
+	UI.addActivePlugin(data)
 }
 
 UI.showSection = function (id) {
@@ -35,7 +36,15 @@ UI.addAvailablePlugin = function (data) {
 	$('#list ul').append(li)
 }
 
-UI.addInstalledPlugin = function (data) {
+UI.addActivePlugin = function (data) {
 	var li = $('<li>').data('name', data['name']).data('uuid', data['uuid']).text(data['name'])
 	$('#add ul').append(li)
+}
+
+UI.getOrder = function() {
+	var arr = []
+	$('#list ul li').each(function(i, li) {
+		arr.push($(li).data('name'))
+	})
+	return arr
 }
