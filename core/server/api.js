@@ -28,16 +28,32 @@ exports.getPlugins = function (req, res){
 			var arr = JSON.parse(str)
 			for (i in arr) arr[i] = 'plugin.'+arr[i]
 			console.log(arr)
+			
+			var result = []
+			var i = 0;
 
-			db.get(arr[0], function (err, resp) {console.log(resp)})
-			async.map(arr, db.get, function (err, active){
+			var stopityo = function (){
+				res.send({active:result})
+			
+			}
 
-				if (err) res.send(500)
-				else {
+			var getityo = function (){
 
-					res.send({active:active})
+				console.log('holaaa')
+				if (arr[i]){
+					console.log('hola')
+					db.get(arr[i], function (err, resa){
+
+						if (err) {res.send(500); return;}
+						result.push(JSON.parse(resa))
+						i++
+						getityo()
+					})
 				}
-			})
+				else stopityo()
+			}
+
+			getityo()
 		}
 		
 	})
