@@ -23,32 +23,35 @@ ul {
 }
 
 ul li {
-	font-size: 1.1em;
-	line-height: 1.3em;
+	font-size: 20px;
 	border-bottom:1px solid #ECECEC;
-	padding: 15px 40px;
+	padding: 0 20px;
+	line-height: 40px;
 }
 
-section, iframe {
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	width: 100%;
-	height: 100%;
-	background: white;
+header {
+	height: 50px;
+	font-size: 30px;
+	line-height: 50px;
+	text-transform: uppercase;
+	background: #ECECEC;
+	text-align: center;
 }
 
-#list {
-	z-index: 1;
+header span {
+	float: left;
+	font-size: 40px;
+	font-weight: bold;
+	line-height: 50px;
+	width:50px;
 }
 
-#add {
-	z-index: 2;
-}
-
-#plugin {
-	z-index: 3;
+button {
+	background: #007D4E;
+	font-size: 30px;
+	height: 50px;
+	line-height: 50px;
+	color: white;
+	font-weight: bold;
 	border: none;
 }

@@ -1,23 +1,27 @@
-var API = function() {
+var API = {}
 
-}
-
-API.prototype.getActivePlugins = function() {
+API.getActivePlugins = function(cb) {
 	$.getJSON('/api/plugins/active', function(plugins) {
-		console.log(plugins)
+		cb(plugins)
 	})
 }
 
-API.prototype.getAllPlugins = function() {
+API.getAllPlugins = function(cb) {
 	$.getJSON('/api/plugins/all', function(allPlugins) {
-		console.log(allPlugins)
+		cb(allPlugins)
 	})
 }
 
-API.prototype.setOrder = function(array) {
+API.addPlugin = function(data, cb) {
+	$.postJSON('/api/plugins/' + name + '/new', {}, function(uuid) {
+		cb(uuid)
+	})
+}
+
+API.setOrder = function(array) {
 	$.post('/api/plugins/order', {'plugins': array})
 }
 
-API.prototype.setHour = function(hour) {
+API.setHour = function(hour) {
 	$.post('/api/plugins/hour', {'hour': hour})
 }
