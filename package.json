@@ -1,0 +1,27 @@
+{
+  "name": "WakeUp",
+  "description": "",
+  "keywords": [
+    "pcm",
+    "audio",
+    "sound",
+    "music",
+    "output",
+    "speaker",
+    "headphone",
+    "alsa",
+    "coreaudio",
+    "openal",
+    "sdl",
+    "portaudio",
+    "jack",
+    "oss",
+    "pulse",
+    "mpg123"
+  ],
+  "version": "0.0.1",
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}
