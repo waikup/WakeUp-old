@@ -10,7 +10,8 @@ var app = express()
 //App config
 
 app.use(express.logger('dev'));
-app.use(express.bodyParser());
+app.use(express.json());
+app.use(express.urlencoded());
 app.use(express.methodOverride())
 
 app.use('/app', express.static(path.join(__dirname, '..', '..', 'app')))
