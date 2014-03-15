@@ -6,8 +6,8 @@ API.getAllPlugins(function(data) {
 	}
 })
 
-/*API.getActivePlugins(function(data) {
+API.getActivePlugins(function(data) {
 	for (var i in data['active']) {
 		UI.addActivePlugin(data['active'][i])
 	}
-})*/
+})

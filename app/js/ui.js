@@ -15,6 +15,7 @@ UI.bind = function() {
 	})
 	$('#list ul').on('click', 'li', function() {
 		$('iframe').attr('src', '/plugin/' + $(this).data('name') + '/index.html')
+		//$('#plugin header').text($(this).data('name'))
 		UI.showSection('#plugin')
 	})
 }

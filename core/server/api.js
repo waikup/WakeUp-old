@@ -7,20 +7,20 @@ var levelup = require('levelup'),
 
 var db = levelup('./db')
 
-exports.redirect = function (req, res){
+exports.redirect = function (req, res) {
 
 	res.redirect('/app')
 }
 
-exports.api = function (req, res){
+exports.api = function (req, res) {
 
 	res.send('Hallo')
 }
 
 //GET all active plugins and their configuration
-exports.getPlugins = function (req, res){
+exports.getPlugins = function (req, res) {
 
-	db.get('activePlugins', function (err, str){
+	db.get('activePlugins', function (err, str) {
 
 		if (!str) res.send({active:[]})
 		else {
@@ -51,24 +51,20 @@ exports.getPlugins = function (req, res){
 				}
 				else stopityo()
 			}
-
-			getityo()
 		}
 		
 	})
 }
 
 //GET list of all available plugins in plugins directory
-exports.listPlugins = function (req, res){
+exports.listPlugins = function (req, res) {
 
 	var fpath = path.join(__dirname, '..', '..', 'plugins')
-	fs.readdir(fpath, function (err, files){
+	fs.readdir(fpath, function (err, files) {
 
 		if (err) res.send(500)
-		else if (files){
-
+		else if (files)
 			res.send({'plugins':files})
-		}
 	})
 }
 
@@ -78,24 +74,18 @@ exports.pluginStatic = function (req, res){
 	var plugin = req.params.name,
 		fpath = req.params[0]
 
-	if (fpath == 'default.css'){
-
+	if (fpath == 'default.css')
 		res.sendfile(path.join(__dirname, '..', '..', 'app/css/default.css'))
-	}
 	else {
 
 		var filepath = path.join(__dirname, '..', '..', 'plugins', plugin, 'config', fpath)
 		console.log(filepath)
 		fs.exists(filepath, function (exists){
 
-			if (!exists){
-
+			if (!exists)
 				res.send(404)
-			}
-			else {
-
+			else 
 				res.sendfile(filepath)
-			}
 		})
 	}
 }
@@ -103,7 +93,7 @@ exports.pluginStatic = function (req, res){
 //POST plugin to add it or edit it
 exports.setPlugin = function (req, res){
 
-	if (req.params.uuid == 'new'){
+	if (req.params.uuid == 'new') {
 
 		var uuid = ids()
 		var attr = {}
@@ -116,7 +106,7 @@ exports.setPlugin = function (req, res){
 			if (err) res.send(500)
 			else {
 
-				db.get('activePlugins', function(err, str){
+				db.get('activePlugins', function(err, str) {
 
 					
 					var arr = []
@@ -124,14 +114,11 @@ exports.setPlugin = function (req, res){
 					else arr = JSON.parse(str)
 
 					arr.push(uuid)
-					db.put('activePlugins', JSON.stringify(arr), function (err){
+					db.put('activePlugins', JSON.stringify(arr), function (err) {
 
 						if (err) res.send(500)
-						else {
-
+						else
 							res.send({plugin:plugin})
-						}
-
 					})
 					
 				})
