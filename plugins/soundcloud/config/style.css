@@ -1,3 +1,5 @@
-h1 {
-color:cyan;
+ul li {
+	background-repeat: no-repeat;
+	background-position: left center;
+	padding: 0 120px;
 }
