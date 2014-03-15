@@ -27,7 +27,6 @@ exports.getPlugins = function (req, res){
 
 			var arr = JSON.parse(str)
 			for (i in arr) arr[i] = 'plugin.'+arr[i]
-			console.log(arr)
 			
 			var result = []
 			var i = 0;
@@ -39,9 +38,9 @@ exports.getPlugins = function (req, res){
 
 			var getityo = function (){
 
-				console.log('holaaa')
+	
 				if (arr[i]){
-					console.log('hola')
+	
 					db.get(arr[i], function (err, resa){
 
 						if (err) {res.send(500); return;}
