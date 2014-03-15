@@ -1,5 +1,11 @@
 var fs = require('fs'),
-	path = require('path')
+	path = require('path'),
+	ids = require('../helpers/ids')
+
+var levelup = require('levelup'),
+	async = require('async')
+
+var db = levelup('./db')
 
 exports.redirect = function (req, res){
 
@@ -14,7 +20,27 @@ exports.api = function (req, res){
 //GET all active plugins and their configuration
 exports.getPlugins = function (req, res){
 
+	db.get('activePlugins', function (err, str){
 
+		if (!str) res.send({active:[]})
+		else {
+
+			var arr = JSON.parse(str)
+			for (i in arr) arr[i] = 'plugin.'+arr[i]
+			console.log(arr)
+
+			db.get(arr[0], function (err, resp) {console.log(resp)})
+			async.map(arr, db.get, function (err, active){
+
+				if (err) res.send(500)
+				else {
+
+					res.send({active:active})
+				}
+			})
+		}
+		
+	})
 }
 
 //GET list of all available plugins in plugins directory
@@ -62,7 +88,41 @@ exports.pluginStatic = function (req, res){
 //POST plugin to add it or edit it
 exports.setPlugin = function (req, res){
 
+	if (req.params.uuid == 'new'){
 
+		var uuid = ids()
+		var attr = {}
+
+		if (req.body) attr = req.body
+
+		var plugin = {name:req.params.name, attr:attr, uuid:uuid}
+		db.put('plugin.'+uuid, JSON.stringify(plugin), function (err){
+
+			if (err) res.send(500)
+			else {
+
+				db.get('activePlugins', function(err, str){
+
+					
+					var arr = []
+					if (!str) arr = []
+					else arr = JSON.parse(str)
+
+					arr.push(uuid)
+					db.put('activePlugins', JSON.stringify(arr), function (err){
+
+						if (err) res.send(500)
+						else {
+
+							res.send({plugin:plugin})
+						}
+
+					})
+					
+				})
+			}
+		})
+	}
 }
 
 //POST plugin order
