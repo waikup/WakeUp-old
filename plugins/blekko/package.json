@@ -8,7 +8,8 @@
   "dependencies": {
     "player": "*",
     "request": "~2.34.0",
-    "lame": "~1.0.3"
+    "lame": "~1.0.3",
+    "speaker": "*"
   },
   "devDependencies": {}
 }
