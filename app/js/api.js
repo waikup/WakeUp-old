@@ -12,6 +12,12 @@ API.getAllPlugins = function() {
 	})
 }
 
+API.activePlugins = function() {
+	$.postJSON('/api/plugins/' + name + '/new', function(uuid) {
+		console.log(uuid)
+	})
+}
+
 API.setOrder = function(array) {
 	$.post('/api/plugins/order', {'plugins': array})
 }
