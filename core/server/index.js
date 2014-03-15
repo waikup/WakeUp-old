@@ -24,6 +24,14 @@ if ('development' == app.get('env')) {
 app.get('/', api.redirect)
 app.get('/api', api.api)
 
+//API
+app.get('/api/plugins/active', middleware.json, api.getPlugins)
+app.get('/api/plugins/all', middleware.json, api.listPlugins)
+app.get('/api/plugin/:name/*', api.pluginStatic)
+
+app.post('/api/plugin/:name/:uuid', middleware.json, api.setPlugin)
+app.post('/api/order', middleware.json, api.setOrder)
+app.post('/api/hour', middleware.json, api.setHour)
 
 
 module.exports = exports = app
