@@ -1,6 +1,10 @@
-var hola = function (){
+var start = function (){
 
-	console.log('hola')
+	var PORT = 8888;
+	require('./server').listen(PORT, function(){
+
+  		console.log('Express server listening on port ' + PORT +' env: '+process.env.NODE_ENV);
+	});
 }
 
-exports = module.exports = hola
+exports = module.exports = start
