@@ -22,6 +22,12 @@ API.setOrder = function(array) {
 	$.post('/api/plugins/order', {'plugins': array})
 }
 
-API.setHour = function(hour) {
-	$.post('/api/plugins/hour', {'hour': hour})
+API.getTime = function(cb) {
+	$.getJSON('/api/time', function(data) {
+		cb(data['time'])
+	})
+}
+
+API.setTime = function(time) {
+	$.post('/api/time', {'time': time})
 }
