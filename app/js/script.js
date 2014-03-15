@@ -1,1 +1,1 @@
-console.log('js')
+UI.bind()

@@ -10,6 +10,6 @@ UI.bind = function() {
 }
 
 UI.showSection = function (id) {
-	$('.current').hide()
-	$(id).show()
+	$('.current').removeClass('current')
+	$(id).addClass('current')
 }
