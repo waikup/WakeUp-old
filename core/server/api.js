@@ -51,6 +51,8 @@ exports.getPlugins = function (req, res) {
 				}
 				else stopityo()
 			}
+
+			getityo()
 		}
 		
 	})
