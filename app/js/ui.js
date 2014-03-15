@@ -8,14 +8,13 @@ UI.bind = function() {
 		UI.showSection('#list')
 	})
 	$('#add ul').on('click', 'li', function() {
-		var name = $(this).data('name')
-		API.addPlugin(name, function(plugin) {
+		API.addPlugin($(this).data('name'), function(plugin) {
 			UI.addActivePlugin(plugin)
 			UI.showSection('#list')
 		})
 	})
 	$('#list ul').on('click', 'li', function() {
-		$('iframe').attr('/plugin/' + name + '/index.html')
+		$('iframe').attr('src', '/plugin/' + $(this).data('name') + '/index.html')
 		UI.showSection('#plugin')
 	})
 }
