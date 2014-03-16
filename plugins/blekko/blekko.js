@@ -3,13 +3,14 @@
 var async = require('async');
 var request = require('request');
 
-module.exports = function (category, times, callback){
+module.exports = function (tag, times, callback){
 
-	request.get('http://blekko.com/ws/' + category + '+/date+/json?p=0', function (err, res, body){
+	request.get('http://blekko.com/ws/' + tag + '+/date+/json?p=0', function (err, res, body){
 
 		if(err){
 			callback(err);
 		} else {
+			
 			var body = JSON.parse(body);
 
 			async.times(times, function (number, callback){
@@ -21,7 +22,20 @@ module.exports = function (category, times, callback){
 					if(err){
 						callback(err);
 					} else{
-						callback(null, JSON.parse(summed));
+
+						if (summed){
+						    try{
+						        var parsed = JSON.parse(summed);
+						    }catch(e){
+						    	callback()
+						    }
+
+						    if(parsed){
+						    	callback(null, parsed);
+						    }
+
+						}
+
 					}
 
 				});

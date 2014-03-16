@@ -3,7 +3,7 @@
 
 	module.exports = function (id, callback){
 
-		// Does this, because the awesome module, player, doesn't works with redirections.
+		// Does this, because the module, player, doesn't work with redirections.
 
 		http.get('http://api.soundcloud.com/tracks/' + id + '/stream?client_id=5a8edbed865ed2b31acf4d9720696e7f', function (res){
 
@@ -15,10 +15,8 @@
 				callback(null, item);
 			});
 
-			// event: on error
 			player.on('error', function(err){
-			    // when error occurs
-			    callback(err);
+			    callback(err);			
 			});
 
 		});

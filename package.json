@@ -24,7 +24,10 @@
     "express": "~3.4.8",
     "levelup": "~0.18.2",
     "leveldown": "~0.10.2",
-    "async": "~0.2.10"
+    "async": "~0.2.10",
+    "request": "*",
+    "lame": "*",
+    "speaker": "*"
   },
   "devDependencies": {},
   "scripts": {

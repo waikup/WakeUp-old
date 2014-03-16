@@ -1,14 +1,14 @@
 {
-  "name": "soundcloud",
+  "name": "meteorology",
   "description": "",
   "keywords": [
     "Soundcloud"
   ],
   "version": "0.0.1",
   "dependencies": {
-    "player": "*",
-    "request": "~2.34.0",
-    "lame": "~1.0.3"
+    "request": "*",
+    "xml2js": "*",
+    "async": "*"
   },
   "devDependencies": {}
 }
