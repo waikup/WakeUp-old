@@ -1,7 +1,7 @@
 var UI = {}
 
 UI.bind = function() {
-	$('#list button').on('click', function() {
+	$('#addButton').on('click', function() {
 		UI.showSection('#add')
 	})
 	$('header span').on('click', function() {
@@ -15,7 +15,11 @@ UI.bind = function() {
 	})
 	$('#list ul').on('click', 'li', function() {
 		$('iframe').attr('src', '/plugin/' + $(this).data('name') + '/index.html')
+		//$('#plugin header').text($(this).data('name'))
 		UI.showSection('#plugin')
+	})
+	$('#saveTime').on('click', function() {
+		API.setTime($('#time').val())
 	})
 }
 
