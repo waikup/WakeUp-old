@@ -15,7 +15,7 @@ UI.bind = function() {
 	})
 	$('#list ul').on('click', 'li', function() {
 		$('iframe').attr('src', '/plugin/' + $(this).data('name') + '/index.html')
-		//$('#plugin header').text($(this).data('name'))
+		$('#plugin h1').text($(this).data('name'))
 		UI.showSection('#plugin')
 	})
 	$('#saveTime').on('click', function() {
@@ -24,18 +24,17 @@ UI.bind = function() {
 }
 
 UI.showSection = function (id) {
-	$('.current').removeClass('current')
-	$(id).addClass('current')
+	$("body").pagecontainer("change", id)
 }
 
 UI.addAvailablePlugin = function (name) {
 	var li = $('<li>').data('name', name).text(name)
-	$('#add ul').append(li)
+	$('#add ul').append(li).listview('refresh')
 }
 
 UI.addActivePlugin = function (data) {
-	var li = $('<li>').data('name', data['name']).data('uuid', data['uuid']).text(data['name'])
-	$('#list ul').append(li)
+	var li = $('<li>').data('name', data['name']).data('uuid', data['uuid']).append('<a>'+data['name']+'</a>')
+	$('#list ul').append(li).listview('refresh')
 }
 
 UI.getOrder = function() {

@@ -4,6 +4,7 @@ API.getTime(function(time) {
 	$('#time').val(time)
 })
 
+$('#add ul, #list ul').listview()
 API.getAllPlugins(function(data) {
 	for (var i in data['plugins']) {
 		UI.addAvailablePlugin(data['plugins'][i])

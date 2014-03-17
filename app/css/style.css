@@ -1,42 +1,7 @@
-section {
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	width: 100%;
-	height: 100%;
-	background: white;
-	display: none;
-}
-
 iframe {
 	width: 100%;
 	height: 100%;
-}
-
-section.current {
-	z-index: 10;
-	display: block;
-}
-
-#list {
-}
-
-#addButton {
-	position: fixed;
-	right: 0;
-	bottom: 0;
-	width: 70px;
-}
-
-#add {
-}
-
-#plugin {
+	margin: 0;
+	padding: 0;
 	border: none;
-}
-
-#time {
-	line-height: 50px;
 }
