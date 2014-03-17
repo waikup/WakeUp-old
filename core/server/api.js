@@ -77,9 +77,7 @@ exports.pluginStatic = function (req, res){
 	var plugin = req.params.name,
 		fpath = req.params[0]
 
-	if (fpath == 'default.css')
-		res.sendfile(path.join(__dirname, '..', '..', 'app/css/default.css'))
-	else if (fpath == 'utils.js')
+	if (fpath == 'utils.js')
 		res.sendfile(path.join(__dirname, '..', '..', 'app/js/utils.js'))
 	else {
 
