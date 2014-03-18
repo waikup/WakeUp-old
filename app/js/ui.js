@@ -7,6 +7,20 @@ UI.bind = function() {
 			console.log('whooah')
 		}
 	})
+
+    $('#list ul').sortable({
+    	delay: 750,
+    	containment: 'parent',
+    	update: function(event, ui) {
+            API.setOrder(UI.getOrder())
+        }
+    })
+    $('#list ul').disableSelection()
+    $('#list ul').bind( "sortstop", function(event, ui) {
+      	$('#list ul').listview('refresh')
+    })
+
+
 	$('#addButton').on('click', function() {
 		UI.showSection('#add')
 	})

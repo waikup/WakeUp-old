@@ -20,7 +20,7 @@ API.addPlugin = function(name, cb) {
 
 
 API.setOrder = function(array) {
-	$.post('/api/plugins/order', {'plugins': array})
+	$.post('/api/order', {'plugins': array})
 }
 
 API.getTime = function(cb) {
