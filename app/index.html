@@ -5,8 +5,8 @@
 	<title>WakeUp</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
-	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="lib/DateTimePicker.css" />
 
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
@@ -19,7 +19,9 @@
 		<a class="ui-btn-right ui-btn ui-btn-inline ui-btn-icon-right ui-icon-plus" href="#add">Add</a>
 	</div>
 	<div role="main" class="ui-content">
-		<ul data-role="listview"></ul>
+		<input type="text" data-field="time" id="time" readonly>
+		<div id="timePicker"></div>
+		<ul data-role="listview" data-inset="true"></ul>
 	</div>
 </div>
 
@@ -28,7 +30,7 @@
 		<h1>Add a new plugin</h1>
 	</div>
 	<div role="main" class="ui-content">
-		<ul data-role="listview" data-filter="true" data-filter-placeholder="Search plugins..."></ul>
+		<ul data-role="listview" data-filter="true" data-filter-placeholder="Search plugins..." data-inset="true"></ul>
 	</div>
 </div>
 
@@ -40,6 +42,10 @@
 		<iframe src=""></iframe>
 	</div>
 </div>
+
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+<script type="text/javascript" src="lib/DateTimePicker.js"></script>
 
 <script src="js/api.js"></script>
 <script src="js/ui.js"></script>

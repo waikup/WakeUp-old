@@ -1,6 +1,12 @@
 var UI = {}
 
 UI.bind = function() {
+
+	$("#timePicker").DateTimePicker({
+		addEventHandlers: function() {
+			console.log('whooah')
+		}
+	})
 	$('#addButton').on('click', function() {
 		UI.showSection('#add')
 	})
@@ -18,7 +24,8 @@ UI.bind = function() {
 		$('#plugin h1').text($(this).data('name'))
 		UI.showSection('#plugin')
 	})
-	$('#saveTime').on('click', function() {
+	$('#timePicker').on('click', '.dtpicker-buttonSet', function() {
+		console.log('uuuu')
 		API.setTime($('#time').val())
 	})
 }
