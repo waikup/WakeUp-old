@@ -1,28 +1,22 @@
-var Utils = {}
+var Plugin = {}
 
-Utils.getConfig = function() {
+Plugin.getConfig = function() {
 	var hashes = window.location.hash.split('#')[1].split('&'),
 		args = {}
 
 	hashes.forEach(function(val) {
 		var v = val.split('=')
-		args[v[0]] = decodeURIComponent(v[1])
+		args[v[0]] = JSON.parse(decodeURIComponent(v[1]))
 	})
+
+	Plugin.uuid = args.uuid
 
 	return args
 }
 
-Utils.parseConfig = function(data) {
-	var encoded = '#'
-	for (var key in data) {
-		encoded += (key + '=' + encodeURIComponent(data[key]) + '&')
-	}
-	encoded = encoded.substring(0, encoded.length - 1);
-	return encoded
-}
+Plugin.sendConfig = function(attr) {
 
-Utils.sendConfig = function(data) {
+	var data = {uuid: Plugin.uuid, attr: attr}
+	parent.postMessage(JSON.stringify(data), "http://localhost:8888")
 
-	// TODO
-	window.parent.configChanged(Utils.parseArgs())
 }

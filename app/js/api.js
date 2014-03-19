@@ -32,3 +32,12 @@ API.getTime = function(cb) {
 API.setTime = function(time) {
 	$.post('/api/time', {'time': time})
 }
+
+API.encodeConfig = function(data) {
+	var encoded = '#'
+	for (var key in data) {
+		encoded += (key + '=' + encodeURIComponent(JSON.stringify(data[key])) + '&')
+	}
+	encoded = encoded.substring(0, encoded.length - 1);
+	return encoded
+}

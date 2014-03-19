@@ -34,7 +34,12 @@ UI.bind = function() {
 		})
 	})
 	$('#list ul').on('click', 'li', function() {
-		$('iframe').attr('src', '/plugin/' + $(this).data('name') + '/index.html')
+		var data = {
+			uuid: $(this).data('uuid'),
+			attr: $(this).data('attr')
+		}
+		var parsed = API.encodeConfig(data)
+		$('iframe').attr('src', '/plugin/' + $(this).data('name') + '/index.html'+parsed)
 		$('#plugin h1').text($(this).data('name'))
 		UI.showSection('#plugin')
 	})
@@ -54,7 +59,7 @@ UI.addAvailablePlugin = function (name) {
 }
 
 UI.addActivePlugin = function (data) {
-	var li = $('<li>').data('name', data['name']).data('uuid', data['uuid']).append('<a>'+data['name']+'</a>')
+	var li = $('<li>').data('name', data['name']).data('uuid', data['uuid']).data('attr', JSON.stringify(data['attr'])).append('<a>'+data['name']+'</a>')
 	$('#list ul').append(li).listview('refresh')
 }
 

@@ -22,6 +22,6 @@ $(document).ready(function() {
 	})	
 })
 
-console.log(Utils.getArgs())
+console.log(Plugin.getConfig())
 
-console.log(Utils.sendArgs({'err': null, 'wheee': 'manolo'}))
+Plugin.sendConfig({'err': null, 'wheee': 'manolo'})
