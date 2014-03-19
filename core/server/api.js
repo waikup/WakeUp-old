@@ -77,8 +77,8 @@ exports.pluginStatic = function (req, res){
 	var plugin = req.params.name,
 		fpath = req.params[0]
 
-	if (fpath == 'utils.js')
-		res.sendfile(path.join(__dirname, '..', '..', 'app/js/utils.js'))
+	if (fpath == 'Plugin.js')
+		res.sendfile(path.join(__dirname, '..', '..', 'app/js/Plugin.js'))
 	else {
 
 		var filepath = path.join(__dirname, '..', '..', 'plugins', plugin, 'config', fpath)

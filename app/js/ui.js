@@ -40,6 +40,7 @@ UI.bind = function() {
 		}
 		var parsed = API.encodeConfig(data)
 		$('iframe').attr('src', '/plugin/' + $(this).data('name') + '/index.html'+parsed)
+		$('#plugin').data('name', $(this).data('name'))
 		$('#plugin h1').text($(this).data('name'))
 		UI.showSection('#plugin')
 	})

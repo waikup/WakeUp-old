@@ -18,6 +18,9 @@ API.addPlugin = function(name, cb) {
 	})
 }
 
+API.savePlugin = function(name, uuid, attr) {
+	$.post('/api/plugin/' + name + '/' + uuid, attr)
+}
 
 API.setOrder = function(array) {
 	$.post('/api/order', {'plugins': array})

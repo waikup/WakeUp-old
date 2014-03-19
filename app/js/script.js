@@ -19,6 +19,8 @@ API.getActivePlugins(function(data) {
 
 window.addEventListener("message", function(e) {
 
-	console.log('parent received message!: ', JSON.parse(e.data))
+	var plugin = JSON.parse(e.data)
+	API.savePlugin($('#plugin').data('name'), plugin.uuid, plugin.attr)
+	UI.showSection('#list')
 
 },false)
