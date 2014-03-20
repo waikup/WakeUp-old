@@ -67,7 +67,7 @@ UI.addActivePlugin = function (data) {
 UI.getOrder = function() {
 	var arr = []
 	$('#list ul li').each(function(i, li) {
-		arr.push($(li).data('name'))
+		arr.push($(li).data('uuid'))
 	})
 	return arr
 }
