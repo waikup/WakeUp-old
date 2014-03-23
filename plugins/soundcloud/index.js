@@ -3,6 +3,7 @@ var Player = require('player'),
 
 module.exports = function (attr, callback) {
 
+	console.log('SOUNDCLOUD SPEAKING')
 	// Does this, because the awesome module, player, doesn't work with redirections.
 	if (attr.id){
 

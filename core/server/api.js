@@ -5,7 +5,8 @@ var fs = require('fs'),
 var levelup = require('levelup'),
 	async = require('async')
 
-var db = require('../db')
+var db = require('../db'),
+	alarm = require('../alarm')
 
 exports.redirect = function (req, res) {
 
@@ -185,7 +186,11 @@ exports.setHour = function (req, res){
 	else {
 
 		db.db.put('time', time, function (err){
-			if (!err) res.send(200, {})
+			if (!err) {
+
+				alarm.fetchAlarm()
+				res.send(200, {})
+			}
 		})
 	}
 }

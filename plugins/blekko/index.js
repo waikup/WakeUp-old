@@ -4,12 +4,11 @@ var async = require('async');
 
 module.exports = function (attr, _cb){
 	
-	console.log(attr)
+	console.log('NEWS SPEAKING')
 	if (attr.category && attr.number){
 
 		blekko(attr.category, attr.number, function (err, news){
 
-			console.log(news)
 			async.mapSeries(news, function (_new, callback){
 				
 				if(_new){

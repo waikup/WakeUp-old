@@ -6,6 +6,7 @@ var tts = require(__dirname + '/../../core/helpers/tts');
 
 module.exports = function (attr, callback){
 
+	console.log('WEATHER SPEAKING')
 	async.waterfall([
 
 		function (callback){

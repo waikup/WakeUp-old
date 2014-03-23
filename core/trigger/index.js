@@ -2,23 +2,31 @@ var db = require('../db'),
 	async = require('async'),
 	path = require('path')
 
+var speaking = false
+
 var trigger = function (){
 
-	db.getPlugins(function (err, result){
+	if (!speaking){
 
-		if (!err) {
+		speaking = true
+		db.getPlugins(function (err, result){
 
-			async.mapSeries(result, function (pl, cb){
-				
-				var plugin = require(path.join(__dirname, '../..', 'plugins', pl.name))
-				plugin(pl.attr, cb)
+			if (!err) {
 
-			}, function (err, finished){
+				console.log('STARTING. TRIGGERED!')
+				async.mapSeries(result, function (pl, cb){
 
-				console.log(finished)
-			})
-		}
-	})	
+					var plugin = require(path.join(__dirname, '../..', 'plugins', pl.name))
+					plugin(pl.attr, cb)
+
+				}, function (err, finished){
+
+					console.log(finished)
+					speaking = false
+				})
+			}
+		})	
+	}
 }
 
 exports = module.exports = trigger
