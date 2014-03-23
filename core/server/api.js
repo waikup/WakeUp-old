@@ -5,7 +5,7 @@ var fs = require('fs'),
 var levelup = require('levelup'),
 	async = require('async')
 
-var db = levelup('./db')
+var db = require('../db')
 
 exports.redirect = function (req, res) {
 
@@ -20,42 +20,13 @@ exports.api = function (req, res) {
 //GET all active plugins and their configuration
 exports.getPlugins = function (req, res) {
 
-	db.get('activePlugins', function (err, str) {
+	db.getPlugins(function (err, result){
 
-		if (!str) res.send({active:[]})
+		if (err || !result) res.send(500, {})
 		else {
 
-			var arr = JSON.parse(str)
-			for (i in arr) arr[i] = 'plugin.'+arr[i]
-			
-			//TODO: use async here, find out why it crashed
-			var result = []
-			var i = 0;
-
-			var stopityo = function (){
-				res.send({active:result})
-			
-			}
-
-			var getityo = function (){
-
-	
-				if (arr[i]){
-	
-					db.get(arr[i], function (err, resa){
-
-						if (err) {res.send(500, {}); return;}
-						result.push(JSON.parse(resa))
-						i++
-						getityo()
-					})
-				}
-				else stopityo()
-			}
-
-			getityo()
+			res.send({active:result})
 		}
-		
 	})
 }
 
@@ -110,19 +81,19 @@ exports.setPlugin = function (req, res){
 				res.send(404, {})
 			else {
 
-				db.put('plugin.'+uuid, JSON.stringify(plugin), function (err){
+				db.db.put('plugin.'+uuid, JSON.stringify(plugin), function (err){
 
 					if (err) res.send(500, {})
 					else {
 
-						db.get('activePlugins', function(err, str) {
+						db.db.get('activePlugins', function(err, str) {
 
 							var arr = []
 							if (!str) arr = []
 							else arr = JSON.parse(str)
 
 							arr.push(uuid)
-							db.put('activePlugins', JSON.stringify(arr), function (err) {
+							db.db.put('activePlugins', JSON.stringify(arr), function (err) {
 
 								if (err) res.send(500, {})
 								else
@@ -144,6 +115,8 @@ exports.setPlugin = function (req, res){
 		if (req.body) attr = req.body
 
 		var plugin = {name:req.params.name, attr:attr, uuid:uuid}
+
+		console.log('Plugin: '+plugin)
 		var filepath = path.join(__dirname, '..', '..', 'plugins', plugin.name)
 		fs.exists(filepath, function (exists){
 
@@ -151,7 +124,7 @@ exports.setPlugin = function (req, res){
 				res.send(404, {})
 			else {
 
-				db.put('plugin.'+uuid, JSON.stringify(plugin), function (err){
+				db.db.put('plugin.'+uuid, JSON.stringify(plugin), function (err){
 
 					if (err) res.send(500, {})
 					else {
@@ -169,7 +142,7 @@ exports.setOrder = function (req, res){
 
 	var order = req.body.plugins
 
-	db.get('activePlugins', function (err, str) {
+	db.db.get('activePlugins', function (err, str) {
 
 		if (err) res.send(500, {})
 		else {
@@ -178,7 +151,7 @@ exports.setOrder = function (req, res){
 
 			if (arr.length == order.length){
 
-				db.put('activePlugins', JSON.stringify(order), function (err){
+				db.db.put('activePlugins', JSON.stringify(order), function (err){
 
 					if (err) res.send(500, {})
 					else {
@@ -194,7 +167,7 @@ exports.setOrder = function (req, res){
 //GET hour to trigger thing
 exports.getHour = function (req, res){
 
-	db.get('time', function (err, t){
+	db.db.get('time', function (err, t){
 
 		if (err || !t) res.send({time:'00:00'})
 		else {
@@ -211,7 +184,7 @@ exports.setHour = function (req, res){
 	if (!time) res.send(500, {})
 	else {
 
-		db.put('time', time, function (err){
+		db.db.put('time', time, function (err){
 			if (!err) res.send(200, {})
 		})
 	}

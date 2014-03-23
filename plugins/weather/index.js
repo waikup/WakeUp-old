@@ -4,7 +4,7 @@ var xml2js = require('xml2js').parseString;
 
 var tts = require(__dirname + '/../../core/helpers/tts');
 
-module.exports = function (callback){
+module.exports = function (attr, callback){
 
 	async.waterfall([
 

@@ -1,22 +1,30 @@
 var Player = require('player'),
 	http = require('http')
 
-module.exports = function (id, callback) {
+module.exports = function (attr, callback) {
 
-	// Does this, because the awesome module, player, doesn't works with redirections.
-	http.get('http://api.soundcloud.com/tracks/' + id + '/stream?client_id=5a8edbed865ed2b31acf4d9720696e7f', function (res) {
+	// Does this, because the awesome module, player, doesn't work with redirections.
+	if (attr.id){
 
-		var player = new Player(res.headers.location)
-		player.play()
+		http.get('http://api.soundcloud.com/tracks/' + attr.id + '/stream?client_id=5a8edbed865ed2b31acf4d9720696e7f', function (res) {
 
-		player.on('playend',function(item){
-			callback(null, item);
+			var player = new Player(res.headers.location)
+			player.play()
+
+			player.on('playend',function(item){
+				callback(null, item);
+			})
+
+			// event: on error
+			player.on('error', function(err){
+			    // when error occurs
+			    callback(err)
+			})
 		})
+	}
+	else {
 
-		// event: on error
-		player.on('error', function(err){
-		    // when error occurs
-		    callback(err)
-		})
-	})
+		cb(new Error("No attributes"))
+	}
+	
 }

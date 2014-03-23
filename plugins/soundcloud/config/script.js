@@ -5,6 +5,7 @@ SC.initialize({
 function search(query, cb) {
 
 	SC.get("/tracks", {q: query, limit: 5}, function(tracks) {
+		
 		cb(tracks)
 	})
 }
@@ -24,4 +25,4 @@ $(document).ready(function() {
 
 console.log(Plugin.getConfig())
 
-Plugin.sendConfig({'err': null, 'wheee': 'manolo'})
+Plugin.sendConfig({'id':'54210592'})
