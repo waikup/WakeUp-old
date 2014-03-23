@@ -1,5 +1,6 @@
 var db = require('../db'),
-	async = require('async')
+	async = require('async'),
+	path = require('path')
 
 var trigger = function (){
 
@@ -8,9 +9,9 @@ var trigger = function (){
 		if (!err) {
 
 			async.mapSeries(result, function (pl, cb){
-
-				console.log(pl)
-				cb(null, pl)
+				
+				var plugin = require(path.join(__dirname, '../..', 'plugins', pl.name))
+				plugin(pl.attr, cb)
 
 			}, function (err, finished){
 
