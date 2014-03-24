@@ -14,7 +14,7 @@ module.exports.speak = function (text, lang, callback) {
 
 	// On Mac Users, uses say command to reproduce sound, speaker seam buggy. Temporal solution
 
-	if(process.platform == 'darwin'){
+	if(false && process.platform == 'darwin'){
 		exec('say ' + text, function (err, stdin, stdout){
 
 			if (callback) callback(err);
