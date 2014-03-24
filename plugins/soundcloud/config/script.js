@@ -2,27 +2,48 @@ SC.initialize({
     client_id: "5a8edbed865ed2b31acf4d9720696e7f"
 })
 
-function search(query, cb) {
+$.mobile.linkBindingEnabled = false
+$.mobile.hashListeningEnabled = false
+$.mobile.pushStateEnabled = false
+$.mobile.changePage.defaults.changeHash = false
 
-	SC.get("/tracks", {q: query, limit: 5}, function(tracks) {
-		
-		cb(tracks)
+$(document).on('ready', function() {
+	var id = Plugin.getConfig()['attr']['id']
+	if (!id) return
+
+	SC.get("/tracks/"+id+".json", null, function(track) {
+		appendLi(track)
+		$('ul').listview('refresh')
 	})
-}
-
-$(document).ready(function() {
-	$('input').on('keyup', function() {
-		$('#results ul').html('')
-		search($(this).val(), function(tracks) {
-			tracks.forEach(function(track) {
-				console.log(track)
-				var li = $('<li>').text(track.title).css('backgroundImage', 'url('+track.artwork_url+')').data('id', track.id)
-				$('#results ul').append(li)
-			})
-		})
-	})	
 })
 
-console.log(Plugin.getConfig())
+function search(query, cb) {
+	SC.get("/tracks", {q: query, limit: 5}, cb)
+}
 
-Plugin.sendConfig({'id':'54210592'})
+function appendLi(track) {
+	var a = $('<a>').text(track.title).append('<img src="'+track.artwork_url+'">'),
+		li = $('<li>').data('id', track.id).append(a)
+
+	$('ul').append(li)
+}
+
+$('[role=main]').on('keypress', 'input', function(e) {
+	if (e.which != 13) return
+
+	$('ul').html('')
+	search($(this).val(), function(tracks) {
+		tracks.forEach(function(track) {
+			appendLi(track)
+		})
+		$('ul').listview('refresh')
+	})
+})
+
+$('ul').on('tap', 'li', function() {
+	Plugin.sendConfig({'id': parseInt($(this).data('id'))})
+})
+
+/*console.log(Plugin.getConfig())
+
+Plugin.sendConfig({'id':'54210592'})*/

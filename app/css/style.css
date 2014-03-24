@@ -5,3 +5,7 @@ iframe {
 	padding: 0;
 	border: none;
 }
+
+#plugin [role="main"] {
+	height: 100%;
+}

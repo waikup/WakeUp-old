@@ -2,11 +2,7 @@ var UI = {}
 
 UI.bind = function() {
 
-	$("#timePicker").DateTimePicker({
-		addEventHandlers: function() {
-			console.log('whooah')
-		}
-	})
+	$("#timePicker").DateTimePicker()
 
     $('#list ul').sortable({
     	delay: 750,
@@ -19,7 +15,6 @@ UI.bind = function() {
     $('#list ul').bind( "sortstop", function(event, ui) {
       	$('#list ul').listview('refresh')
     })
-
 
 	$('#addButton').on('click', function() {
 		UI.showSection('#add')
@@ -45,7 +40,6 @@ UI.bind = function() {
 		UI.showSection('#plugin')
 	})
 	$('#timePicker').on('click', '.dtpicker-buttonSet', function() {
-		console.log('uuuu')
 		API.setTime($('#time').val())
 	})
 }
