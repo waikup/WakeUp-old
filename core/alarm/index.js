@@ -1,5 +1,6 @@
 var db = require('../db'),
-	trigger = require('../trigger')
+	trigger = require('../trigger'),
+	alarm_plugin = require('../../plugins/alarm')
 
 var alarms = []
 
@@ -48,8 +49,8 @@ var fetchAlarm = function (cb){
 		if (!err && t){
 
 			alarms.push(t)
-			console.log('NEW ALARM')
-			if (cb) cb(t)
+			console.log('Alarm set, speaking it')
+			alarm_plugin({alarm:t}, cb)
 		}
 	})
 }

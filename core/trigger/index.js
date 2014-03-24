@@ -4,11 +4,12 @@ var db = require('../db'),
 
 var speaking = false
 
-var trigger = function (){
+var trigger = function (start, end){
 
 	if (!speaking){
 
 		speaking = true
+		if (start) start()
 		db.getPlugins(function (err, result){
 
 			if (!err) {
@@ -23,9 +24,14 @@ var trigger = function (){
 
 					console.log(finished)
 					speaking = false
+					if (end) end()
 				})
 			}
 		})	
+	}
+	else {
+
+		end()
 	}
 }
 

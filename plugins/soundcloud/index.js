@@ -25,7 +25,7 @@ module.exports = function (attr, callback) {
 	}
 	else {
 
-		cb(new Error("No attributes"))
+		if (cb) cb(new Error("No attributes"))
 	}
 	
 }

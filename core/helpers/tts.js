@@ -9,7 +9,7 @@ module.exports.speak = function (text, lang, callback) {
 	// This blocks allows to call speak without lang and callback. No lang defaults to English
 
 	if(!callback && lang){
-		callback = lang;
+		callback = function (){};;
 		lang = "en";
 	} else if(text && !lang){
 		lang = "en";
@@ -21,7 +21,7 @@ module.exports.speak = function (text, lang, callback) {
 
 	if(process.platform == 'darwin'){
 		exec('say ' + text, function (err, stdin, stdout){
-			callback(err);
+			if (callback) callback(err);
 		});
 	} else{
 		var platform = process.platform;
@@ -41,13 +41,13 @@ module.exports.speak = function (text, lang, callback) {
 			if(isWin32) {
 				timer = setTimeout(function() {
 					speaker.close();
-					callback()
+					if (callback) callback()
 				}, length);
 			}
 		});
 
 		speaker.on('close', function() {
-			callback();
+			if (callback) callback();
 		});
 
 		r.pipe(decoder).pipe(speaker);

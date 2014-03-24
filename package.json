@@ -27,7 +27,8 @@
     "async": "~0.2.10",
     "request": "*",
     "lame": "*",
-    "speaker": "*"
+    "speaker": "*",
+    "moment": "~2.5.1"
   },
   "devDependencies": {},
   "scripts": {

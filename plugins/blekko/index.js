@@ -2,7 +2,7 @@ var tts = require(__dirname + '/../../core/helpers/tts');
 var blekko = require(__dirname + '/blekko');
 var async = require('async');
 
-module.exports = function (attr, _cb){
+module.exports = exports = function (attr, _cb){
 	
 	console.log('NEWS SPEAKING')
 	if (attr.category && attr.number){
@@ -35,17 +35,17 @@ module.exports = function (attr, _cb){
 			}, function (err){
 				_cb(err);
 			});
-
-		});
+		})
 	}
+
 	else {
 		var err = new Error("No attributes")
-		//_cb(err)
+		if (_cb) _cb(err)
 	}
 	
 };
 
 // Test code.
-module.exports('popcorn', 5, true, function(err){
+/*module.exports('popcorn', 5, true, function(err){
 	console.log(err);
-});
+});*/
