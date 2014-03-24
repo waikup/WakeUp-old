@@ -4,7 +4,7 @@ var xml2js = require('xml2js').parseString;
 
 var tts = require(__dirname + '/../../core/helpers/tts');
 
-module.exports = function (attr, callback){
+module.exports = function (attr, _callback){
 
 	console.log('WEATHER SPEAKING')
 	async.waterfall([
@@ -62,9 +62,7 @@ module.exports = function (attr, callback){
 
 	], function (err, geoIp, weather){
 
-		tts.speak('The weather forecast for ' + geoIp.city + ' is ' + weather.text + ' with temperatures arround '+ weather.temp + ' degrees', function (err){
-			callback(err);
-		});
+		tts.speak('The weather forecast for ' + geoIp.city + ' is ' + weather.text + ' with temperatures arround '+ weather.temp + ' degrees', 'en', _callback);
 	});
 
 };

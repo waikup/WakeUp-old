@@ -8,19 +8,15 @@ module.exports.speak = function (text, lang, callback) {
 
 	// This blocks allows to call speak without lang and callback. No lang defaults to English
 
-	if(!callback && lang){
-		callback = function (){};;
-		lang = "en";
-	} else if(text && !lang){
-		lang = "en";
-		callback = function (){};
-	}
+	lang = lang || "en"
+	text = text || "No text"
 
 
 	// On Mac Users, uses say command to reproduce sound, speaker seam buggy. Temporal solution
 
 	if(process.platform == 'darwin'){
 		exec('say ' + text, function (err, stdin, stdout){
+
 			if (callback) callback(err);
 		});
 	} else{
