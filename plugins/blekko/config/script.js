@@ -1,4 +1,16 @@
-console.log(Object.keys(Plugin))
+$.mobile.linkBindingEnabled = false
+$.mobile.hashListeningEnabled = false
+$.mobile.pushStateEnabled = false
+$.mobile.changePage.defaults.changeHash = false
 
-Plugin.getConfig()
-Plugin.sendConfig({'category':'Apple', 'number':3})
+var attr = Plugin.getConfig()['attr']
+
+$(document).on('ready', function() {
+	$('#number').val(attr['number']).slider('refresh')
+})
+
+$('#category').val(attr['category'])
+
+$('button').on('tap', function() {
+	Plugin.sendConfig({category: $('#category').val(), number: parseInt($('#number').val())})
+})
