@@ -43,7 +43,3 @@ $('[role=main]').on('keypress', 'input', function(e) {
 $('ul').on('tap', 'li', function() {
 	Plugin.sendConfig({'id': parseInt($(this).data('id'))})
 })
-
-/*console.log(Plugin.getConfig())
-
-Plugin.sendConfig({'id':'54210592'})*/
