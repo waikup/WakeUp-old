@@ -6,7 +6,7 @@ var speaking = false
 
 var trigger = function (start, end){
 
-	if (speaking) return end()
+	if (speaking && end) return end()
 
 	speaking = true
 	if (start) start()
