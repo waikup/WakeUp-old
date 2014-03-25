@@ -12,7 +12,7 @@ var trigger = function (start, end){
 	if (start) start()
 	db.getPlugins(function (err, result){
 
-		if (!err) return
+		if (err) return
 
 		console.log('STARTING. TRIGGERED!')
 		async.mapSeries(result, function (pl, cb){
