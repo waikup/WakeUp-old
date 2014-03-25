@@ -17,4 +17,4 @@ module.exports.speak = function (text, lang, callback) {
 		exec('say ' + text, callback)
 	else
 		pico.say(text, lang, callback)
-};
+}
