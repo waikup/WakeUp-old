@@ -11,14 +11,11 @@ Plugin.getConfig = function() {
 
 	Plugin.uuid = args.uuid
 	args.attr = JSON.parse(args.attr)
-	Plugin.args = args.attr
 
 	return args
 }
 
 Plugin.sendConfig = function(attr) {
-
 	var data = {uuid: Plugin.uuid, attr: attr}
 	parent.postMessage(JSON.stringify(data), "http://localhost:8888")
-
 }

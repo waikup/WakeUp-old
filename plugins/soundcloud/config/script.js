@@ -1,11 +1,10 @@
+var toDisable = ['linkBindingEnabled', 'hashListeningEnabled', 'pushStateEnabled', 'changePage.defaults.changeHash']
+for (var i in toDisable)
+	eval('$.mobile["'+toDisable[i]+'"] = false')
+
 SC.initialize({
     client_id: "5a8edbed865ed2b31acf4d9720696e7f"
 })
-
-$.mobile.linkBindingEnabled = false
-$.mobile.hashListeningEnabled = false
-$.mobile.pushStateEnabled = false
-$.mobile.changePage.defaults.changeHash = false
 
 $(document).on('ready', function() {
 	var id = Plugin.getConfig()['attr']['id']
