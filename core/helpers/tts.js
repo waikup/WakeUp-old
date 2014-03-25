@@ -1,11 +1,10 @@
-var pico = require('picotts')
-
-var exec = require('child_process').exec
+var pico = require('picotts'),
+	exec = require('child_process').exec
 
 module.exports.speak = function (text, lang, callback) {
 
 	// This blocks allows to call speak without lang and callback. No lang defaults to English
-	if(typeof lang == 'function') {
+	if (typeof lang == 'function') {
 		callback = lang
 		lang = "en-US"
 	}
@@ -19,5 +18,4 @@ module.exports.speak = function (text, lang, callback) {
 		exec('say ' + text, callback)
 	else
 		pico.say(text, lang, callback)
-
-};
+}
