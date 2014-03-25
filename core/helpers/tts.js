@@ -15,7 +15,7 @@ module.exports.speak = function (text, lang, callback) {
 	lang = lang || "en-US"
 	text = text || "No text"
 
-	if(false && process.platform == 'darwin')
+	if(process.platform == 'darwin')
 		exec('say ' + text, callback)
 	else
 		pico.say(text, lang, callback)
