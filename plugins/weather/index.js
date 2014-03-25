@@ -55,7 +55,7 @@ module.exports = function (attr, _callback){
 
 	], function (err, geoIp, weather){
 
-		tts.speak('The weather forecast for ' + geoIp.city + ' is ' + weather.text + ' with temperatures arround '+ weather.temp + ' degrees', "en-US", _callback);
+		tts.speak('The weather forecast for ' + geoIp.city + ' is ' + weather.text + ' with temperatures arround '+ weather.temp + ' degrees', _callback);
 	});
 
 };

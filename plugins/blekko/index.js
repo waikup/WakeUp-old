@@ -17,7 +17,7 @@ module.exports = exports = function (attr, _cb){
 			
 			if(!_new) return
 
-			tts.speak(_new.title, "en-US", function () {
+			tts.speak(_new.title, function () {
 				if(/*attr.summary*/true){
 					async.mapSeries(_new.summary, function (sentence, callback){
 
@@ -30,9 +30,4 @@ module.exports = exports = function (attr, _cb){
 
 		}, _cb);
 	})
-};
-
-// Test code.
-/*module.exports('popcorn', 5, true, function(err){
-	console.log(err);
-});*/
+}

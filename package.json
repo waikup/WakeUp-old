@@ -29,7 +29,8 @@
     "lame": "*",
     "speaker": "*",
     "moment": "~2.5.1",
-    "picotts": "~0.1.0"
+    "picotts": "~0.1.0",
+    "say": "~0.5.0"
   },
   "devDependencies": {},
   "scripts": {
