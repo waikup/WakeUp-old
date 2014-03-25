@@ -1,51 +1,30 @@
-var Speaker = require('speaker');
-var lame = require('lame');
+var say = require('say')
 var request = require("request");
 
 var exec = require('child_process').exec;
 
-module.exports.speak = function (text, lang, callback) {
+module.exports.speak = function (text, voice, callback) {
 
 	// This blocks allows to call speak without lang and callback. No lang defaults to English
 
-	lang = lang || "en"
-	text = text || "No text"
+	if(typeof voice == 'function'){
+		callback = voice;
+		voice = "Alex"
+	} else {
+		voice = voice || "Alex"
+	}
+
+	if(!callback){
+		callback = function (){
+			return true;
+		}
+	}
+	
 
 
 	// On Mac Users, uses say command to reproduce sound, speaker seam buggy. Temporal solution
-
-	if(false && process.platform == 'darwin'){
-		exec('say ' + text, function (err, stdin, stdout){
-
-			if (callback) callback(err);
-		});
-	} else{
-		var platform = process.platform;
-		var isWin32 = (platform == "win32");
-
-		var url = "http://translate.google.com/translate_tts?tl="+lang+"&q=" + text;
-
-		var decoder = new lame.Decoder();
-		var speaker = new Speaker();
-		var r = request({uri:url});
-		var length = 5000;
-		var timer;
-
-		//request.get({uri : "http://translate.google.com/translate_tts?tl=en&q=hello%20world"}).pipe(new lame.Decoder()).pipe(new Speaker());
-		r.on('complete', function(e) {
-			length = e.socket.bytesRead/2;
-			if(isWin32) {
-				timer = setTimeout(function() {
-					speaker.close();
-					if (callback) callback()
-				}, length);
-			}
-		});
-
-		speaker.on('close', function() {
-			if (callback) callback();
-		});
-
-		r.pipe(decoder).pipe(speaker);
+	if(text){
+		say.speak('Alex', text, callback);
 	}
+
 };

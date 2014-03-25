@@ -17,11 +17,11 @@ module.exports = exports = function (attr, _cb){
 			
 			if(!_new) return
 
-			tts.speak(_new.title, 'en', function () {
+			tts.speak(_new.title, function () {
 				if(/*attr.summary*/true){
 					async.mapSeries(_new.summary, function (sentence, callback){
 
-						tts.speak(sentence, 'en', callback);
+						tts.speak(sentence, callback);
 
 					}, callback);
 				}
