@@ -8,5 +8,5 @@ module.exports = exports = function (attr, cb){
 	var d = moment(attr.alarm, "HH:mm")
 
 	if (moment() >= d) d.add('days', 1)
-	tts.speak("Your alarm is set for "+attr.alarm+" "+d.fromNow(), "en", cb)
+	tts.speak("Your alarm is set for "+attr.alarm+" "+d.fromNow(), "en-US", cb)
 }
