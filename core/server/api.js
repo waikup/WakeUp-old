@@ -23,11 +23,9 @@ exports.getPlugins = function (req, res) {
 
 	db.getPlugins(function (err, result){
 
-		if (err || !result) res.send(500, {})
-		else {
+		if (err || !result) return res.send(500, {})
 
-			res.send({active:result})
-		}
+		res.send({active:result})
 	})
 }
 
@@ -78,33 +76,28 @@ exports.setPlugin = function (req, res){
 		var filepath = path.join(__dirname, '..', '..', 'plugins', plugin.name)
 		fs.exists(filepath, function (exists){
 
-			if (!exists)
-				res.send(404, {})
-			else {
+			if (!exists) return res.send(404, {})
 
-				db.db.put('plugin.'+uuid, JSON.stringify(plugin), function (err){
+			db.db.put('plugin.'+uuid, JSON.stringify(plugin), function (err){
 
-					if (err) res.send(500, {})
-					else {
+				if (err) return res.send(500, {})
 
-						db.db.get('activePlugins', function(err, str) {
+				db.db.get('activePlugins', function(err, str) {
 
-							var arr = []
-							if (!str) arr = []
-							else arr = JSON.parse(str)
+					var arr = []
+					if (!str) arr = []
+					else arr = JSON.parse(str)
 
-							arr.push(uuid)
-							db.db.put('activePlugins', JSON.stringify(arr), function (err) {
+					arr.push(uuid)
+					db.db.put('activePlugins', JSON.stringify(arr), function (err) {
 
-								if (err) res.send(500, {})
-								else
-									res.send({plugin:plugin})
-							})
-							
-						})
-					}
+						if (err) return res.send(500, {})
+						
+						res.send({plugin:plugin})
+					})
+					
 				})
-			}
+			})
 		})
 
 	}
@@ -121,19 +114,14 @@ exports.setPlugin = function (req, res){
 		var filepath = path.join(__dirname, '..', '..', 'plugins', plugin.name)
 		fs.exists(filepath, function (exists){
 
-			if (!exists)
-				res.send(404, {})
-			else {
+			if (!exists) return res.send(404, {})
 
-				db.db.put('plugin.'+uuid, JSON.stringify(plugin), function (err){
+			db.db.put('plugin.'+uuid, JSON.stringify(plugin), function (err){
 
-					if (err) res.send(500, {})
-					else {
+				if (err) return res.send(500, {})
 
-						res.send({plugin:plugin})
-					}
-				})
-			}
+				res.send({plugin:plugin})
+			})
 		})
 	}
 }
@@ -145,22 +133,18 @@ exports.setOrder = function (req, res){
 
 	db.db.get('activePlugins', function (err, str) {
 
-		if (err) res.send(500, {})
-		else {
+		if (err) return res.send(500, {})
 
-			var arr = JSON.parse(str)
+		var arr = JSON.parse(str)
 
-			if (arr.length == order.length){
+		if (arr.length == order.length){
 
-				db.db.put('activePlugins', JSON.stringify(order), function (err){
+			db.db.put('activePlugins', JSON.stringify(order), function (err){
 
-					if (err) res.send(500, {})
-					else {
+				if (err) return res.send(500, {})
 
-						 res.send(200, {})
-					}
-				})
-			}
+				res.send(200, {})
+			})
 		}
 	})
 }
@@ -171,10 +155,8 @@ exports.getHour = function (req, res){
 	db.db.get('time', function (err, t){
 
 		if (err || !t) res.send({time:'00:00'})
-		else {
-
+		else
 			res.send({time:t})
-		}
 	})
 }
 
@@ -182,15 +164,12 @@ exports.getHour = function (req, res){
 exports.setHour = function (req, res){
 
 	var time = req.body['time']
-	if (!time) res.send(500, {})
-	else {
+	if (!time) return res.send(500, {})
 
-		db.db.put('time', time, function (err){
-			if (!err) {
+	db.db.put('time', time, function (err){
+		if (err) return
 
-				alarm.fetchAlarm()
-				res.send(200, {})
-			}
-		})
-	}
+		alarm.fetchAlarm()
+		res.send(200, {})
+	})
 }

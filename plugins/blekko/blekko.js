@@ -7,54 +7,30 @@ module.exports = function (tag, times, callback){
 
 	request.get('http://blekko.com/ws/' + tag + '+/date+/json?p=0', function (err, res, body){
 
-		if(err){
-			callback(err);
-		} else {
-			
-			var body = JSON.parse(body);
+		if(err) return callback(err);
 
-			async.times(times, function (number, callback){
+		var body = JSON.parse(body);
 
-				var _new = body.RESULT[number];
+		async.times(times, function (number, callback){
 
-				request.get('http://clipped.me/algorithm/clippedapi.php?url=' + _new.url, function (err, res, summed){
+			var _new = body.RESULT[number];
 
-					if(err){
-						callback(err);
-					} else{
+			request.get('http://clipped.me/algorithm/clippedapi.php?url=' + _new.url, function (err, res, summed){
 
-						if (summed){
-						    try{
-						        var parsed = JSON.parse(summed);
-						    }catch(e){
-						    	callback()
-						    }
+				if(err || !summed) return callback(err);
 
-						    if(parsed){
-						    	callback(null, parsed);
-						    }
+			    try{
+			        var parsed = JSON.parse(summed);
+			        callback(null, parsed);
+			    }catch(e){
+			    	callback()
+			    }
 
-						}
-
-					}
-
-				});
-
-
-			}, function (err, news){
-				callback(err, news);
 			});
 
-		}
+		}, callback);
 
 	});
 
-
-
-
-
-
-
 	//http://clipped.me/algorithm/clippedapi.php?url=
-
 };

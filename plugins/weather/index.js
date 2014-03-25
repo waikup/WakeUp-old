@@ -14,13 +14,10 @@ module.exports = function (attr, _callback){
 
 				try{
 				    var parsed = JSON.parse(body);
+				    callback(null, parsed);
 				}catch(e){
-				    	callback()
+				    callback()
 				}
-
-			    if(parsed){
-			    	callback(null, parsed);
-			    }
 
 			});
 		},
@@ -31,11 +28,9 @@ module.exports = function (attr, _callback){
 
 				xml2js(body, function (err, result){
 
-					if(err){
-						callback(err);
-					} else{
-						callback(null, geoIp, result['places'].place[0].woeid[0]);
-					}
+					if(err) return callback(err);
+
+					callback(null, geoIp, result['places'].place[0].woeid[0]);
 
 				});
 
@@ -48,11 +43,9 @@ module.exports = function (attr, _callback){
 
 				xml2js(body, function (err, result){
 
-					if(err){
-						callback(err);
-					} else{
-						callback(null, geoIp, result.rss.channel[0].item[0]['yweather:condition'][0]['$']);
-					}
+					if(err) return callback(err);
+					
+					callback(null, geoIp, result.rss.channel[0].item[0]['yweather:condition'][0]['$']);
 
 				});
 

@@ -6,33 +6,27 @@ var speaking = false
 
 var trigger = function (start, end){
 
-	if (!speaking){
+	if (speaking) return end()
 
-		speaking = true
-		if (start) start()
-		db.getPlugins(function (err, result){
+	speaking = true
+	if (start) start()
+	db.getPlugins(function (err, result){
 
-			if (!err) {
+		if (!err) return
 
-				console.log('STARTING. TRIGGERED!')
-				async.mapSeries(result, function (pl, cb){
+		console.log('STARTING. TRIGGERED!')
+		async.mapSeries(result, function (pl, cb){
 
-					var plugin = require(path.join(__dirname, '../..', 'plugins', pl.name))
-					plugin(pl.attr, cb)
+			var plugin = require(path.join(__dirname, '../..', 'plugins', pl.name))
+			plugin(pl.attr, cb)
 
-				}, function (err, finished){
+		}, function (err, finished){
 
-					console.log(finished)
-					speaking = false
-					if (end) end()
-				})
-			}
-		})	
-	}
-	else {
-
-		end()
-	}
+			console.log(finished)
+			speaking = false
+			if (end) end()
+		})
+	})	
 }
 
 exports = module.exports = trigger
