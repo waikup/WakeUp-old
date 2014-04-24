@@ -61,4 +61,3 @@ We are also developing a server that will be hosted in FiLab Cloud to make all t
 
 We made a short video to try to show how it works and how the prototype looks like.
 ## 8. Team
-

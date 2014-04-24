@@ -2,22 +2,10 @@
   "name": "WakeUp",
   "description": "",
   "keywords": [
-    "pcm",
-    "audio",
-    "sound",
+    "alarm",
     "music",
-    "output",
-    "speaker",
-    "headphone",
-    "alsa",
-    "coreaudio",
-    "openal",
-    "sdl",
-    "portaudio",
-    "jack",
-    "oss",
-    "pulse",
-    "mpg123"
+    "weather",
+    "news"
   ],
   "version": "0.0.1",
   "dependencies": {
@@ -30,7 +18,9 @@
     "speaker": "*",
     "moment": "~2.5.1",
     "picotts": "~0.1.0",
-    "say": "~0.5.0"
+    "say": "~0.5.0",
+    "player": "*",
+    "xml2js": "*"
   },
   "devDependencies": {},
   "scripts": {
