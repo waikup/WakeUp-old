@@ -8,7 +8,7 @@
 2. Solution
 3. Prototype status
 4. Fiware Stack in WakeUp
-5. Developer API and Source code
+5. Installation and Developer API
 6. Future plans
 7. Video
 8. Team
@@ -57,11 +57,61 @@ If we get selected to the next round, we use Campus Party week to discuss with F
 
 We are also developing a server that will be hosted in FiLab Cloud to make all the text to audio conversions, they are a bit slow in the RaspberryPi and we could use Fiware's computing power to get this done in a more efficient way. We are thinking of also using some kind of caching so we don't have to process the same sentence twice. 
 
-## 5. Source Code and Developer API
+## 5. Installation and Developer API
 
+The source code of the project can be found on [Github](https://github.com/CampusHacks/WakeUp/)
 
+#### Installation
+
+We assume you are already running nodeJS v0.10.x or greater and use Raspbian as OS.
+
+To install WakeUp in your RaspberryPi you need to install first PicoTTS. 
+
+```
+$ sudo nano /etc/apt/sources.list
+// Add this lines at the bottom
+deb http://archive.raspbian.org/raspbian wheezy main contrib non-free rpideb-src http://archive.raspbian.org/raspbian wheezy main contrib non-free rpi
+// Ctr-X 
+
+$ apt-get update$ apt-get install fakeroot$ apt-get build-dep libttspico-utils$ cd$ mkdir my_build/$ cd /my_build/$ apt-get source libttspico-utils$ ls$ cd svox-1.0-<version>/$ dpkg-buildpackage -rfakeroot -us -uc
+$ cd my_build$ sudo dpkg -i libttspico0..armhf.deb$ sudo dpkg -i libttspico-data..all.deb$ sudo dpkg -i libttspico-utils...armhf.deb
+```
+Them we will download WakeUp and install its dependencies:
+
+```
+$ git clone https://github.com/CampusHacks/WakeUp.git
+$ cd WakeUp/
+$ npm install
+```
+
+And run:
+```
+$ node index.js
+```
+
+#### Developer API
+It is very easy to create a module for WakeUp. You can start by copying one of the existent in `plugins/` and writing your own code. A module has to export a function that will get the `attributes` saved in the database and has to call a `callback` when it finishes to continue. You can use the library in `/../../core/helpers/tts` to translate text to voice, and whenever we outsource it to Fiware, your moudle will update itself.
+
+We will improve the Developer API documentation.
+
+ 
 ## 6. Future plans
+
+If we get a prize in the Hackathon we would love to make the product, WakeUp, a reality. We'd love to be able to finance the first batch of devices and sell them. Given the cheap components we use, we could sell it for less than $50, so it could be a mass product.
+
+Ww think it is a product people will love and use every day. We would love to get feedback in the Hackathon and make it a reality.
+
 ## 7. Video
 
 We made a short video to try to show how it works and how the prototype looks like.
+
+It can be found in [Youtube](https://www.youtube.com/watch?v=8WOz8KBxENw)
 ## 8. Team
+
+WakeUp is made by part of the team that built Smads, the winner of the first Fiware Hackathon in Campus Party London.
+
+* **Alejandro Perezpayá (@alexdev_)**: He's in charge of the backend. He's got a lot of experience working with Fiware technologies. He also won the 3rd price in the Fiware Hackathon in Santander.
+
+* **Jorge Izquierdo (@izqui9)**: He is does iOS and Web Development. He attended to ICT 2013 in Lithuania with Alejandro to present their Fiware project, Smads, in front of the highest European personalities.
+
+* **Luis Iván Cuende (@licuende)**: He's the founder of Asturix, a Linux distro based on Ubuntu. He is very good at Web and Low Level System development. He is 18, so he will be the representant of the team.
