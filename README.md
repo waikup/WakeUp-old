@@ -28,6 +28,8 @@ We wanted to create a new concept of alarm clock. So the first decision we made 
 In order to do this, we realized that we needed to allow developers create their own modules to wake up. We provide modules for waking up with News, weather and music and an open platform for creating new ones (explained further in point 5). We are also open source and (if we get to build it) open hardware.
 The user can choose how they can be waken up by choosing among their installed modules and set the hour they want to wake up.
 
+![](https://github.com/CampusHacks/WakeUp/blob/master/images/Screenshot_2014-04-24-17-39-03.png?raw=true)
+
 We are building a product separated from the smartphone to make the alarm bullet proof. If you use your phone as alarm clock, if the battery dies during the night, you won't be woken up.
 
 ## 3. Prototype status
@@ -35,6 +37,8 @@ We are building a product separated from the smartphone to make the alarm bullet
 Given the Fiware Hackathon, we saw it as a good opportunity to make an early prototype of WakeUp and present it in society to get feedback. Right now, to make prototyping quicker, we are using the RaspberryPi platform to build the hardware prototype. We attached a pair of speakers to it and an ethernet cable that at the moment has already been replaced by a wifi connection. 
 
 Right now you can set the alarm using the webapp and choose and order the modules with which you want to be woken up. You can choose to hear the weather, then your favorite song and then some news related to your stock market investments. It is totally customizable, you even can configure each module with your preferred settings, like the number of news you want to hear or the topic.
+
+![](https://github.com/CampusHacks/WakeUp/blob/master/images/Screenshot_2014-04-24-17-40-12.png?raw=true)
 
 We have created a strong and reliable core, that allows us and other developers to create modules on top of WakeUp and create new experiences. 
 
