@@ -25,7 +25,7 @@ We also did some research on the matter and found some interesting studies, such
 
 We wanted to create a new concept of alarm clock. So the first decision we made is to let the user decide how they wanted to be woken up, and the second decision was to build a product separated from the smartphone.
 
-In order to do this, we realized that we needed to allow developers create their own modules to wake up. We provide modules for waking up with News, weather and music and an open platform for creating new ones (explained further in point 5). We are also open source and (if we get to build it) open hardware.
+In order to do this, we realized that we needed to allow developers create their own modules to wake up. We provide modules for waking up with News, weather and music, and an open platform for creating new ones (explained further in point 5). We are also open source and (if we get to build it) open hardware.
 The user can choose how they can be waken up by choosing among their installed modules and set the hour they want to wake up.
 
 ![](https://github.com/CampusHacks/WakeUp/blob/master/images/Screenshot_2014-04-24-17-39-03.png?raw=true)
@@ -99,7 +99,7 @@ We will improve the Developer API documentation.
 
 If we get a prize in the Hackathon we would love to make the product, WakeUp, a reality. We'd love to be able to finance the first batch of devices and sell them. Given the cheap components we use, we could sell it for less than $50, so it could be a mass product.
 
-Ww think it is a product people will love and use every day. We would love to get feedback in the Hackathon and make it a reality.
+We think it is a product people will love and use every day. We would love to get feedback in the Hackathon and make it a reality.
 
 ## 7. Video
 
@@ -112,6 +112,6 @@ WakeUp is made by part of the team that built Smads, the winner of the first Fiw
 
 * **Alejandro Perezpayá (@alexdev_)**: He's in charge of the backend. He's got a lot of experience working with Fiware technologies. He also won the 3rd price in the Fiware Hackathon in Santander.
 
-* **Jorge Izquierdo (@izqui9)**: He is does iOS and Web Development. He attended to ICT 2013 in Lithuania with Alejandro to present their Fiware project, Smads, in front of the highest European personalities.
+* **Jorge Izquierdo (@izqui9)**: He does iOS and Web Development. He attended to ICT 2013 in Lithuania with Alejandro to present their Fiware project, Smads, in front of the highest European personalities.
 
 * **Luis Iván Cuende (@licuende)**: He's the founder of Asturix, a Linux distro based on Ubuntu. He is very good at Web and Low Level System development. He is 18, so he will be the representant of the team.
